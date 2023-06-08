@@ -15,10 +15,17 @@
     </properties>
 
     <dependencies>
+        <!--   java bean快速开发     -->
         <dependency>
             <groupId>org.projectlombok</groupId>
             <artifactId>lombok</artifactId>
-            <version>1.18.20</version>
+            <version>1.18.10</version>
+        </dependency>
+        <!--   日志组件实现     -->
+        <dependency>
+            <groupId>ch.qos.logback</groupId>
+            <artifactId>logback-classic</artifactId>
+            <version>1.2.3</version>
         </dependency>
         <dependency>
             <groupId>junit</groupId>
