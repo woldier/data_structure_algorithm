@@ -61,7 +61,7 @@ public class SingleLinkedList implements Iterable<Integer> {
     }
 
 
-    /***
+    /**
      * description 私有内部类,链表结点,本类加了static修饰
      * <p></p>
      * 没有加static,因此是与类的对象绑定的,依附于类的对象存在  (应用场景,如JUC ReentrantLock 的同步器中使用的Node,Condition,就是非静态的,可以在这些内部类的方法中操作外部类)
