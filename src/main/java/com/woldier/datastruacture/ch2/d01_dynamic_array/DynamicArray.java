@@ -164,13 +164,13 @@ public class DynamicArray implements Iterable<Integer> {
 //        System.out.println("==========自定义foreach============");
 //        dynamicArray.forEach(System.out::print);
 //        System.out.println("\n==========增强for,通过实现Iterable接口获得的特性============");
-//        for (Integer integer : dynamicArray) {
-//            System.out.print(integer);
-//        }
+        for (Integer integer : dynamicArray) {
+            System.out.print(integer);
+        }
 //        System.out.println("\n==========Iterable接口自带默认方法forEach============");
 //        dynamicArray.forEach(System.out::print);
-        System.out.println("\n==========stream============");
-        dynamicArray.stream().forEach(System.out::print);
+//        System.out.println("\n==========stream============");
+//        dynamicArray.stream().forEach(System.out::print);
 
     }
 
