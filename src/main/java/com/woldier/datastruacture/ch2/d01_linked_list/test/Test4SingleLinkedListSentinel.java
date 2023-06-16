@@ -1,6 +1,7 @@
-package com.woldier.datastruacture.ch2.d01_linked_list;
+package com.woldier.datastruacture.ch2.d01_linked_list.test;
 
 
+import com.woldier.datastruacture.ch2.d01_linked_list.SingleLinkedListSentinel;
 import org.junit.Assert;
 import org.junit.Test;
 import org.junit.jupiter.api.Assertions;

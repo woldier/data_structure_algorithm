@@ -1,5 +1,6 @@
-package com.woldier.datastruacture.ch2.d01_linked_list;
+package com.woldier.datastruacture.ch2.d01_linked_list.test;
 
+import com.woldier.datastruacture.ch2.d01_linked_list.SingleLinkedList;
 import org.junit.Test;
 
 /**
