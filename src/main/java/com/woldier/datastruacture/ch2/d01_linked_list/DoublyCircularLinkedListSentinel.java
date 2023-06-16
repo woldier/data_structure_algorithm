@@ -1,6 +1,7 @@
 package com.woldier.datastruacture.ch2.d01_linked_list;
 
 import java.util.Iterator;
+import java.util.function.Consumer;
 
 /**
  * @author woldier
@@ -172,4 +173,14 @@ public class DoublyCircularLinkedListSentinel implements Iterable<Integer> {
         return new IllegalArgumentException("当前链表尾空,无法进行remove操作");
     }
 
+    public void loop(Consumer<Integer> consumer){
+        recursion(head.next,consumer);
+    }
+
+    private void recursion(Node node,Consumer<Integer> consumer){
+        if(node!=head){
+            consumer.accept(node.value);
+            recursion(node.next,consumer);
+        }
+    }
 }

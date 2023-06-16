@@ -40,6 +40,6 @@ public class Test4DoublyCircularLinkedList {
         Assertions.assertIterableEquals(Arrays.asList(3,2,1),list);
         list.removeByValue(2);
         Assertions.assertIterableEquals(Arrays.asList(3,1),list);
-
+        list.loop(System.out::print);
     }
 }
