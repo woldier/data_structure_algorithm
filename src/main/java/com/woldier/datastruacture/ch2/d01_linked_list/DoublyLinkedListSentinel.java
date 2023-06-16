@@ -161,13 +161,59 @@ public class DoublyLinkedListSentinel implements Iterable<Integer>{
     }
 
 
+    /***
+    *
+    * description 移除指定索引位置的节点
+    *
+    * @param index
+    * @return void
+    * @author: woldier
+    * @date: 2023/6/16 9:39
+    */
     public void remove(int index){
         Node node = findNode(index-1);
         if(node==null||node.next == tail)
             throw getIllegalArgumentException(index);
-
+        Node remove = node.next;
         node.next.next.prev = node;
         node.next = node.next.next;
+        remove.prev =null;  //help GC
+        remove.next =null;
+    }
+
+
+    /**
+    *
+    * description 移除队头
+    *
+    *
+    * @return void
+    * @author: woldier
+    * @date: 2023/6/16 9:40
+    */
+    public void removeFirst(){
+        Node remove = head;
+        head = head.next;
+        head.value = Integer.MIN_VALUE;
+        head.prev =null;
+        remove.next =null;
+    }
+
+    /**
+    *
+    * description 移除队尾元素
+    *
+    *
+    * @return void
+    * @author: woldier
+    * @date: 2023/6/16 9:43
+    */
+    public void removeLast(){
+        Node remove = tail;
+        tail = tail.prev;
+        tail.value = Integer.MIN_VALUE;
+        tail.next =null;
+        remove.prev = null; //help GC
     }
 
 }

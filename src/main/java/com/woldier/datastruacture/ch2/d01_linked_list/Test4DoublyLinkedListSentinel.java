@@ -14,7 +14,7 @@ import java.util.Arrays;
 public class Test4DoublyLinkedListSentinel {
 
     @Test
-    public void test(){
+    public void test() {
         DoublyLinkedListSentinel list = new DoublyLinkedListSentinel();
 
         list.addFirst(1);
@@ -24,9 +24,17 @@ public class Test4DoublyLinkedListSentinel {
         list.addLast(5);
         list.addLast(6);
 
-        Assertions.assertIterableEquals(Arrays.asList(1,2,3,4,5,6),list);
-        list.add(6,7);
-        Assertions.assertIterableEquals(Arrays.asList(1,2,3,4,5,6,7),list);
+        Assertions.assertIterableEquals(Arrays.asList(1, 2, 3, 4, 5, 6), list);
+        list.add(6, 7);
+        Assertions.assertIterableEquals(Arrays.asList(1, 2, 3, 4, 5, 6, 7), list);
+        list.removeLast();
+        Assertions.assertIterableEquals(Arrays.asList(1, 2, 3, 4, 5, 6), list);
+        list.remove(5);
+        Assertions.assertIterableEquals(Arrays.asList(1, 2, 3, 4, 5), list);
+
+        Assertions.assertThrows(IllegalArgumentException.class, () -> list.remove(5));
+        list.removeFirst();
+        Assertions.assertIterableEquals(Arrays.asList(2, 3, 4, 5), list);
 
     }
 }
