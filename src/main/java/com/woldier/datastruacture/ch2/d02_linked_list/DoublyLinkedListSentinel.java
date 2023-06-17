@@ -1,4 +1,4 @@
-package com.woldier.datastruacture.ch2.d01_linked_list;
+package com.woldier.datastruacture.ch2.d02_linked_list;
 
 import java.util.Iterator;
 

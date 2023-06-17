@@ -1,12 +1,10 @@
-package com.woldier.datastruacture.ch2.d01_linked_list.test;
+package com.woldier.datastruacture.ch2.d02_linked_list.test;
 
 
-import com.woldier.datastruacture.ch2.d01_linked_list.SingleLinkedListSentinel;
-import org.junit.Assert;
+import com.woldier.datastruacture.ch2.d02_linked_list.SingleLinkedListSentinel;
 import org.junit.Test;
 import org.junit.jupiter.api.Assertions;
 
-import java.util.ArrayList;
 import java.util.Arrays;
 
 
