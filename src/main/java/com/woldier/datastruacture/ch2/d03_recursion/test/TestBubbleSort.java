@@ -14,10 +14,20 @@ import java.util.Collections;
  **/
 public class TestBubbleSort {
     @Test
-    public void test(){
+    public void test() {
         int[] a = {2, 1, 0, 5};
-        BubbleSort.bubbleSort1(a,3);
-        for (int i=0;i<a.length;i++)
+        BubbleSort.bubbleSort1(a, 3);
+        for (int i = 0; i < a.length; i++)
             System.out.print(a[i]);
     }
+
+
+    @Test
+    public void test2() {
+        int[] a = {1, 2, 3, 5};
+        BubbleSort.bubbleSort2(a, 3);
+        for (int i = 0; i < a.length; i++)
+            System.out.print(a[i]);
+    }
+
 }
