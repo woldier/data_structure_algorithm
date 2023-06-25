@@ -19,6 +19,7 @@ public class InsertionSort {
         int p = low;
         while(p>-1&&nums[p]>value){
             nums[p+1] = nums[p];
+
             p--;
         }
         nums[p+1] = value;
