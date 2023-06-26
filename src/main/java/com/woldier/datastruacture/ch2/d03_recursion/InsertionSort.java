@@ -25,4 +25,6 @@ public class InsertionSort {
         nums[p+1] = value;
         insertionSort(nums,low+1);
     }
+
+
 }
