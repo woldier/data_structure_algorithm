@@ -1,5 +1,11 @@
 package com.woldier.datastruacture.ch2.d02_linked_list;
+/**
+*
+* description leetcode 链表节点类
 
+* @author: woldier
+* @date: 2023/6/26 上午9:44
+*/
 public class ListNode {
     int val;
     ListNode next;
