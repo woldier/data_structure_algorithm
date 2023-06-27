@@ -22,9 +22,6 @@ public interface Queue<E> {
     boolean offer(E e);
 
 
-
-    E remove();
-
     /**
     *
     * description 从队头获取值并移除
@@ -45,4 +42,13 @@ public interface Queue<E> {
      * @date: 2023/6/26 下午9:10
      */
     E peek();
+
+    /**
+    *
+    * description 判断是否队空
+    * @return 空返回true,否则返回null
+    * @author: woldier
+    * @date: 2023/6/27 下午1:50
+    */
+    boolean isEmpty();
 }
