@@ -112,7 +112,10 @@ public class LinkedListQueue<E>
     @Override
     public Iterator<E> iterator() {
         return new Iterator<E>() {
-            Node<E> p = head.next;
+            Node<E> p = head
+
+
+                    .next;
             @Override
             public boolean hasNext() {
                 return p!=head;
