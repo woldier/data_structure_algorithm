@@ -61,6 +61,9 @@ public class ArrayQueue2<E> implements Queue<E>,Iterable<E> {
         return size==length;
     }
 
+    public int getLength(){
+        return size;
+    }
 
     @Override
     public Iterator<E> iterator() {
