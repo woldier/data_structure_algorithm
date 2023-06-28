@@ -13,13 +13,12 @@ import org.junit.Test;
 */
 public class Test4E01LeetCode102 {
     @Test
-    public void test(){
+    public void test() {
         TreeNode p15 = new TreeNode(15);
         TreeNode p7 = new TreeNode(7);
         TreeNode p9 = new TreeNode(9);
         TreeNode p20 = new TreeNode(20, p15, p7);
         TreeNode p = new TreeNode(3, p9, p20);
-        E01LeetCode102 t = new E01LeetCode102();
-        t.levelOrder(p);
     }
+
 }
