@@ -6,7 +6,7 @@ package com.woldier.datastruacture.ch2.d05_stack;
  * @author: woldier
  * @date: 2023/6/28 下午12:31
  */
-public interface Stack<E> extends Iterable<E> {
+public interface Stack<E>  {
     /**
      * description 元素入栈
      *
