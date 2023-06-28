@@ -34,7 +34,7 @@ public interface DeQueue<E> {
      * @author: woldier
      * @date: 2023/6/28 下午7:41
      */
-    E poolFirst();
+    E pollFirst();
 
     /**
      * description 获取队尾元素
@@ -43,7 +43,7 @@ public interface DeQueue<E> {
      * @author: woldier
      * @date: 2023/6/28 下午7:41
      */
-    E poolLast();
+    E pollLast();
 
     /**
      * description 获取队头元素,不删除
