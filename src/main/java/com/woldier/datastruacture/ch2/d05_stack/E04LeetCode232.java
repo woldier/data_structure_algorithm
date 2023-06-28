@@ -50,7 +50,7 @@ package com.woldier.datastruacture.ch2.d05_stack;
  * @author: woldier
  * @date: 2023/6/28 下午6:22
  */
-public class E03LeetCode232 {
+public class E04LeetCode232 {
 
 
     /**
@@ -67,7 +67,7 @@ public class E03LeetCode232 {
     private ArrayStack<Integer> read;
 
 
-    public E03LeetCode232() {
+    public E04LeetCode232() {
         write = new ArrayStack<>(100);
         read = new ArrayStack<>(100);
 
