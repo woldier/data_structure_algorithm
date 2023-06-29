@@ -148,14 +148,18 @@ public class MaxHeapWoldier {
 //        int[] array = {1, 2, 3, 4, 5, 6, 7};
 //        MaxHeap maxHeap = new MaxHeap(array);
 //        System.out.println(Arrays.toString(maxHeap.array));
-
-        int[] array = {2, 3, 1, 7, 4, 5, 6};
-        MaxHeapWoldier maxHeap = new MaxHeapWoldier(array);
-        System.out.println(Arrays.toString(maxHeap.array));
-        while(maxHeap.size>0){
-            maxHeap.swap(0,--maxHeap.size);
-            maxHeap.down(0);
-        }
-        System.out.println(Arrays.toString(maxHeap.array));
+//
+//        int[] array = {2, 3, 1, 7, 4, 5, 6};
+//        MaxHeapWoldier maxHeap = new MaxHeapWoldier(array);
+//        System.out.println(Arrays.toString(maxHeap.array));
+//        while(maxHeap.size>0){
+//            maxHeap.swap(0,--maxHeap.size);
+//            maxHeap.down(0);
+//        }
+//        System.out.println(Arrays.toString(maxHeap.array));
+        MaxHeapWoldier heap = new MaxHeapWoldier(10000);
+        heap.sort(new int[]{
+                3,2,1,5,6,4});
+        System.out.println(Arrays.toString(heap.array));
     }
 }
