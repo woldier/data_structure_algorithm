@@ -1,4 +1,4 @@
-package com.woldier.datastruacture.ch2.d04_queue;
+package com.woldier.datastruacture.ch2.d07_priorityqueue;
 
 /**
  * description 优先级队列中的元素需要实现此接口,返回优先级大小

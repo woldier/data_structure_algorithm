@@ -1,4 +1,4 @@
-package com.woldier.datastruacture.ch2.d04_queue;
+package com.woldier.datastruacture.ch2.d07_priorityqueue;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;

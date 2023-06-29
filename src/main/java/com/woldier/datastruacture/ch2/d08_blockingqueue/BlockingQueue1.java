@@ -1,4 +1,4 @@
-package com.woldier.datastruacture.ch2.d04_queue;
+package com.woldier.datastruacture.ch2.d08_blockingqueue;
 
 import java.util.concurrent.TimeUnit;
 import java.util.concurrent.locks.Condition;

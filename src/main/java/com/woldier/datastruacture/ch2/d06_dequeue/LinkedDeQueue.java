@@ -1,4 +1,4 @@
-package com.woldier.datastruacture.ch2.d04_queue;
+package com.woldier.datastruacture.ch2.d06_dequeue;
 
 import java.util.Iterator;
 

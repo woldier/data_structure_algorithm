@@ -1,9 +1,8 @@
-package com.woldier.datastruacture.ch2.d04_queue.test;
+package com.woldier.datastruacture.ch2.d07_priorityqueue.test;
 
-import com.woldier.datastruacture.ch2.d04_queue.Priority;
+import com.woldier.datastruacture.ch2.d07_priorityqueue.Priority;
 import com.woldier.datastruacture.ch2.d04_queue.Queue;
 
-import java.util.Arrays;
 import java.util.Iterator;
 
 /**

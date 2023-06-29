@@ -1,21 +1,21 @@
-package com.woldier.datastruacture.ch2.d04_queue;
+package com.woldier.datastruacture.ch2.d07_priorityqueue;
+
+import com.woldier.datastruacture.ch2.d04_queue.Queue;
 
 import java.util.Iterator;
 
 /**
- * description 优先级队列的,实现思路是 入队时与传统队列相同 直接尾部插入,
- * <p>
- * 出队时,搜索队列,找到优先级最高的,然后移动数组
+ * description 实现思想是入队时通过插入排序判断插入位置
  *
  * @author: woldier
- * @date: 2023/6/29 上午10:54
+ * @date: 2023/6/29 下午12:37
  */
-public class PriorityQueue1<E extends Priority> implements Queue<E>, Iterable<E> {
+public class PriorityQueue2<E extends Priority> implements Iterable<E>, Queue<E> {
     private Priority[] array;
     private int size;
 
 
-    public PriorityQueue1(int capacity) {
+    public PriorityQueue2(int capacity) {
         array = new Priority[capacity];
     }
 
@@ -29,8 +29,17 @@ public class PriorityQueue1<E extends Priority> implements Queue<E>, Iterable<E>
      */
     @Override
     public boolean offer(E e) {
-        if (isFull()) return false;
-        array[size++] = e;
+        if (isFull())
+            return false;
+        int i;
+        for (i = size - 1; i >= 0; i--) {
+            if (array[i].priority() > e.priority())  //当当前指针的优先级较高,那么移动
+                array[i + 1] = array[i];
+            else  //当指针指向元素的优先级平级或者小那么
+                break;
+        }
+        array[i + 1] = e;
+        size++;
         return true;
     }
 
@@ -43,26 +52,13 @@ public class PriorityQueue1<E extends Priority> implements Queue<E>, Iterable<E>
      */
     @Override
     public E poll() {
-        if (isEmpty()) return null;  //当队空返回null
-        //找到当前优先级最高的
-        int max = findMaxPriority();
-        //判断是否是队尾,是队尾不用移动,不是队尾需要移动
-        Priority priority = array[max];
-        array[max] = null; //help GC
-        if (max < size - 1)
-            System.arraycopy(array, max + 1, array, max, size - max - 1);
-        size--;
-        return (E) priority;
+        if (isEmpty()) return null;
+        Priority elem = array[size - 1];
+        array[--size] = null;//help GC
+        return (E) elem;
+
     }
 
-    private int findMaxPriority() {
-        int max = 0;
-        for (int i = 0; i < size; i++) {
-            if (array[i].priority() > array[max].priority())
-                max = i;
-        }
-        return max;
-    }
 
     /**
      * description 从队头获取值不移除
@@ -73,9 +69,8 @@ public class PriorityQueue1<E extends Priority> implements Queue<E>, Iterable<E>
      */
     @Override
     public E peek() {
-        int maxPriority = findMaxPriority();
-
-        return (E) array[maxPriority];
+        if (isEmpty()) return null;
+        return (E) array[size - 1];
     }
 
     /**
@@ -114,13 +109,5 @@ public class PriorityQueue1<E extends Priority> implements Queue<E>, Iterable<E>
                 return (E) array[count++];
             }
         };
-    }
-
-    private int inc(int value) {
-        return (value + 1) % array.length;
-    }
-
-    private int dec(int value) {
-        return (value - 1 + array.length) % array.length;
     }
 }

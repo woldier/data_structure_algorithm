@@ -1,7 +1,7 @@
-package com.woldier.datastruacture.ch2.d04_queue.test;
+package com.woldier.datastruacture.ch2.d06_dequeue.test;
 
-import com.woldier.datastruacture.ch2.d04_queue.ArrayDequeue;
-import com.woldier.datastruacture.ch2.d04_queue.LinkedDeQueue;
+import com.woldier.datastruacture.ch2.d06_dequeue.ArrayDequeue;
+import com.woldier.datastruacture.ch2.d06_dequeue.LinkedDeQueue;
 import org.junit.Test;
 import org.junit.jupiter.api.Assertions;
 

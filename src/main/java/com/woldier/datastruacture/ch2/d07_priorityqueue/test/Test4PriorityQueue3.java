@@ -1,11 +1,9 @@
-package com.woldier.datastruacture.ch2.d04_queue.test;
+package com.woldier.datastruacture.ch2.d07_priorityqueue.test;
 
-import com.woldier.datastruacture.ch2.d04_queue.PriorityElem;
-import com.woldier.datastruacture.ch2.d04_queue.PriorityQueue1;
+import com.woldier.datastruacture.ch2.d07_priorityqueue.PriorityElem;
+import com.woldier.datastruacture.ch2.d07_priorityqueue.test.PriorityQueue3;
 import org.junit.Test;
 import org.junit.jupiter.api.Assertions;
-
-import java.util.Arrays;
 
 public class Test4PriorityQueue3 {
     @Test
