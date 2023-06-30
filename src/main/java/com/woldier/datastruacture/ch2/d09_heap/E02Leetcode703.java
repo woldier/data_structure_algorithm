@@ -54,7 +54,7 @@ public class E02Leetcode703 {
             offer(nums[i]);
             i++;
         }
-        while(i<nums.length&&nums.length>i){
+        while(i<nums.length){
             if(nums[i]>array[0])
                 replace(nums[i]);
             i++;
