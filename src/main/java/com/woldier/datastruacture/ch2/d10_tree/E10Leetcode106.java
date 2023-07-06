@@ -52,13 +52,13 @@ public class E10Leetcode106 {
      */
     private TreeNode buildTree1(int[] inorder, int start1, int[] postorder, int start2, int length) {
         if (length == 0) return null;
-        if (length == 1) return new TreeNode(postorder[start1+length-1]);
+        if (length == 1) return new TreeNode(postorder[start2+length-1]);
         int p = 0;
-        while(p+start1<length&&inorder[p+start1]!=postorder[start2+length-1]) p++;
+        while(p<length&&inorder[p+start1]!=postorder[start2+length-1]) p++;
 
         TreeNode l, r;
         l = buildTree1(inorder,start1,postorder,start2,p);
         r = buildTree1(inorder,start1+p+1,postorder,start2+p,length-1-p);
-        return new TreeNode(postorder[start1+length-1], l, r);
+        return new TreeNode(postorder[start2+length-1], l, r);
     }
 }

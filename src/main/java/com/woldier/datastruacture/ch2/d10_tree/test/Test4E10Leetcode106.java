@@ -8,7 +8,8 @@ public class Test4E10Leetcode106 {
     public void test(){
         E10Leetcode106  s = new E10Leetcode106();
 
-        s.buildTree(new int []{9,3,15,20,7},new int []{9,15,7,20,3});
+//        s.buildTree(new int []{9,3,15,20,7},new int []{9,15,7,20,3});
+        s.buildTree(new int []{1,2,3,4},new int []{3,4,2,1});
 
 //
 
