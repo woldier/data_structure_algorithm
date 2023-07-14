@@ -1,8 +1,6 @@
-package com.woldier.datastruacture.ch2.d10_tree;
+package com.woldier.datastruacture.ch2.d10_tree.tree;
 
 import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.LinkedList;
 
 public class E08ExpressionTree {
 

@@ -1,7 +1,6 @@
-package com.woldier.datastruacture.ch2.d10_tree;
+package com.woldier.datastruacture.ch2.d10_tree.tree;
 
 import java.util.ArrayList;
-import java.util.List;
 
 /**
  * description 给定一个二叉树，找出其最大深度。

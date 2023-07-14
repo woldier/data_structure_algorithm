@@ -1,6 +1,6 @@
 package com.woldier.datastruacture.ch2.d10_tree.test;
 
-import com.woldier.datastruacture.ch2.d10_tree.E10Leetcode106;
+import com.woldier.datastruacture.ch2.d10_tree.tree.E10Leetcode106;
 import org.junit.jupiter.api.Test;
 
 public class Test4E10Leetcode106 {

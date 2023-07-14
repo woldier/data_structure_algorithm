@@ -1,4 +1,4 @@
-package com.woldier.datastruacture.ch2.d10_tree;
+package com.woldier.datastruacture.ch2.d10_tree.tree;
 
 /**
  * description 给你一棵二叉树的根节点 root ，翻转这棵二叉树，并返回其根节点。

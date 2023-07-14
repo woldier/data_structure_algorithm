@@ -1,7 +1,7 @@
 package com.woldier.datastruacture.ch2.d10_tree.test;
 
-import com.woldier.datastruacture.ch2.d10_tree.TreeNode;
-import com.woldier.datastruacture.ch2.d10_tree.TreeTraversal;
+import com.woldier.datastruacture.ch2.d10_tree.tree.TreeNode;
+import com.woldier.datastruacture.ch2.d10_tree.tree.TreeTraversal;
 import org.junit.jupiter.api.Test;
 
 public class Test4TreeTraversal {

@@ -1,9 +1,9 @@
-package com.woldier.datastruacture.ch2.d10_tree;
+package com.woldier.datastruacture.ch2.d10_tree.tree;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class E01Leetcode144 {
+public class E02Leetcode94 {
     private List<Integer> preOrder(TreeNode p){
         ArrayList<TreeNode> stack = new ArrayList();
         List<Integer> res = new ArrayList();
@@ -21,19 +21,16 @@ public class E01Leetcode144 {
         return res;
     }
 
-
-
-      public class TreeNode {
-          int val;
-          TreeNode left;
-          TreeNode right;
-          TreeNode() {}
-          TreeNode(int val) { this.val = val; }
-          TreeNode(int val, TreeNode left, TreeNode right) {
-              this.val = val;
-              this.left = left;
-              this.right = right;
-          }
-      }
-
+    public class TreeNode {
+        int val;
+        TreeNode left;
+        TreeNode right;
+        TreeNode() {}
+        TreeNode(int val) { this.val = val; }
+        TreeNode(int val, TreeNode left, TreeNode right) {
+            this.val = val;
+            this.left = left;
+            this.right = right;
+        }
+    }
 }

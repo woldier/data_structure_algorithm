@@ -1,10 +1,7 @@
-package com.woldier.datastruacture.ch2.d10_tree;
+package com.woldier.datastruacture.ch2.d10_tree.bst;
 
 import org.junit.Test;
 import org.junit.jupiter.api.Assertions;
-
-import java.util.Arrays;
-import java.util.Iterator;
 
 public class BSTTree2<K extends Comparable<K>, V>  {
     BSTNode<K, V> root;

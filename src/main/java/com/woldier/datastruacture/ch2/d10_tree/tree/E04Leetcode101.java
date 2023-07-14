@@ -1,7 +1,6 @@
-package com.woldier.datastruacture.ch2.d10_tree;
+package com.woldier.datastruacture.ch2.d10_tree.tree;
 
 import java.util.ArrayList;
-import java.util.List;
 
 /**
  * description 给你一个二叉树的根节点 root ， 检查它是否轴对称。
