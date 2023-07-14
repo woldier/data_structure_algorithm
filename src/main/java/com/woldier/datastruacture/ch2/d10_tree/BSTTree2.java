@@ -3,14 +3,18 @@ package com.woldier.datastruacture.ch2.d10_tree;
 import org.junit.Test;
 import org.junit.jupiter.api.Assertions;
 
-public class BSTTree2<K extends Comparable<K>, V> {
+import java.util.Arrays;
+import java.util.Iterator;
+
+public class BSTTree2<K extends Comparable<K>, V>  {
     BSTNode<K, V> root;
+
 
     private static class BSTNode<K extends Comparable<K>, V> {
         K key;
         V value;
-        BSTNode left;
-        BSTNode right;
+        BSTNode<K, V>  left;
+        BSTNode<K, V>  right;
 
         public BSTNode(K key) {
             this.key = key;
@@ -21,7 +25,7 @@ public class BSTTree2<K extends Comparable<K>, V> {
             this.value = value;
         }
 
-        public BSTNode(K key, V value, BSTNode left, BSTNode right) {
+        public BSTNode(K key, V value, BSTNode<K, V>  left, BSTNode<K, V>  right) {
             this.key = key;
             this.value = value;
             this.left = left;
@@ -54,10 +58,11 @@ public class BSTTree2<K extends Comparable<K>, V> {
      * @author: woldier
      * @date: 2023/7/6 下午4:07
      */
-    private V doGet(BSTNode root, K key) {
-        BSTNode p = root;
+    private V doGet(BSTNode<K, V>  root, K key) {
+        BSTNode<K, V>  p = root;
         while (p != null && p.key != key) {
-            if (p.key.compareTo(key) > 0) //p的值较小,那么往左边走
+            if (p.key
+                    .compareTo(key) > 0) //p的值较小,那么往左边走
                 p = p.left;
             else
                 p = p.right;
@@ -74,7 +79,7 @@ public class BSTTree2<K extends Comparable<K>, V> {
      * @author: woldier
      * @date: 2023/7/6 下午4:38
      */
-    private V doGetRecursion(BSTNode p, K key) {
+    private V doGetRecursion(BSTNode<K, V>  p, K key) {
         if (p == null) return null;
         if (p.key == key) return (V) p.value;
         return (V) (p.key.compareTo(key) > 0 ? doGetRecursion(p.left, key) : doGetRecursion(p.right, key));
@@ -177,7 +182,7 @@ public class BSTTree2<K extends Comparable<K>, V> {
      * @date: 2023/7/6 下午7:27
      */
     public V successor(K key) {
-        BSTNode<K, V> p = root, parent = root;
+        BSTNode<K, V> p = root,parent = root;
         while (p != null) {
             parent = p;
             if (p.key.compareTo(key) > 0) //p的值大,往左走
@@ -222,35 +227,117 @@ public class BSTTree2<K extends Comparable<K>, V> {
                 break;
             }
         }
-        if (parent == null) {
-            root.right = p.right;
-            root.left = p.left;
-
+        if(p==null){ // 没有找到
+            return null;
         }
-        else if (p.left != null && p.right == null) { //情况一
+        else if (p.left != null && p.right == null) { //情况一 左孩子不为null,右孩子为null
             shiftSingleLR(parent,p,true);
-
         }
-        else if (p.right != null && p.left == null) { //情况2
+        else if (p.left == null&&p.right != null) { //情况2  左孩子为null,右孩子不为null
             shiftSingleLR(parent,p,false);
         }
-        else if (p.right == null && p.left == null) {//情况3
-            parent = null;
+        else if (p.left == null) {//情况3 左右孩子都为null
+                shiftSingleLR(parent,p,true);
         } else { //情况4 左右孩子都有
-
+                shift(p);
         }
         return p.value;
     }
 
+    /**
+    *
+    * description 待删除节点只有一个孩子的情况,进行的删除操作
+    *
+    * @param parent  父亲节点
+    * @param p  待删除节点
+    * @param isL  待删除节点是有左孩子还是右孩子,true代表只有左孩子吗,false代表只有右孩子
+    * @author: woldier
+    * @date: 2023/7/14 上午10:22
+    */
     private void shiftSingleLR(BSTNode<K, V> parent, BSTNode<K, V> p, boolean isL) {
-        if (p == parent.left) parent.left = isL ? p.left : p.right;
-        if (p == parent.right) parent.right = isL ? p.left : p.right;
+        if(parent == null)
+            root = isL ? p.left : p.right;
+        else if (p == parent.left)
+            parent.left = isL ? p.left : p.right;
+        else if (p == parent.right)
+            parent.right = isL ? p.left : p.right;
     }
 
-    private void shift(BSTNode<K, V> parent, BSTNode<K, V> p){
-
-
+    /**
+    *
+    * description 被删除节点左右孩子都有的情况,先找到p的后继s,以及其父亲sp
+     * 如果sp就是待删除节点,那么只需要将s托孤给parent
+     * 如果sp不是,那么吧s托孤给parent,然后吧s的右孩子托孤给sp
+    *
+    * @param p
+    * @author: woldier
+    * @date: 2023/7/14 上午10:33
+    */
+    private void shift( BSTNode<K, V> p){
+        //找到后继
+        BSTNode<K,V> s = p.right,sp=p; //初始化后继及后继的父节点
+        while(s.left!=null){
+            sp = s;
+            s = s.left;
+        }
+        //判断sp与p的关系
+        p.value = s.value;
+        if(sp == p){ //如果相等,那么只需要吧s替代p
+            p.right = s.right;
+        }
+        else { //如果不相等,
+            sp.left = s.right;
+        }
+        s.right = null; //help GC
     }
+
+    /**
+    *
+    * description 递归删除
+    * <pre>
+     *     {@code
+     *         4
+     *       /   \
+     *      2     6
+     *     / \   / \
+     *    1   3 5   7
+     *     }
+    * </pre>
+    * @param node
+    * @param key
+    * @return  返回删除后的子节点信息
+    * @author: woldier
+    * @date: 2023/7/14 上午11:05
+    */
+    public BSTNode<K,V> doDelete( BSTNode<K,V> node, K key){
+        if(node == null) return null;
+        if(key.compareTo(node.key)>0){ //key 比node 的值大,那么应该往右边走
+            node.right = doDelete(node.right,key);
+            return node;
+        }
+        else if(key.compareTo(node.key)<0){ //key 比node 的值小,那么应该往左边走
+            node.left = doDelete(node.left,key);
+            return node;
+        }
+        else { //node 的key与查找的key相同
+            //执行删除
+            //如果只有左孩子
+            if(node.left==null&&node.right!=null){
+                return node.right;
+            }
+            //如果只有右孩子
+            else if(node.left!=null&&node.right==null){
+                return node.left;
+            }            //如果为叶子节点
+            else if(node.left==null){
+                return null;
+            }else {            //如果两个孩子都没有
+                shift(node);  //重建树
+                return node; //返回重建后的node
+            }
+        }
+    }
+
     @Test
     public void test() {
         /*
@@ -287,6 +374,9 @@ public class BSTTree2<K extends Comparable<K>, V> {
 
         Assertions.assertSame(n3.value, tree1.successor(2));
         Assertions.assertSame(n5.value, tree1.successor(4));
+
+        tree1.delete(7);
+//        Assertions.assertIterableEquals(Arrays.asList(n1,n2,n3,root,n5,n6),);
 
 
     }
