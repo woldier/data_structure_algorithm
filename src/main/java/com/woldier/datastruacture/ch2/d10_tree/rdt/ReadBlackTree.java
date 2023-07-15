@@ -1,5 +1,7 @@
 package com.woldier.datastruacture.ch2.d10_tree.rdt;
 
+import static com.woldier.datastruacture.ch2.d10_tree.rdt.ReadBlackTree.Color.BLACK;
+
 /**
  * description 红黑树
  * <p>
@@ -128,7 +130,7 @@ public class ReadBlackTree {
      * @date: 2023/7/15 上午9:58
      */
     private boolean isBlack(Node node) {
-        return node == null || node.color == Color.BLACK;
+        return node == null || node.color == BLACK;
     }
 
     /**
@@ -305,14 +307,14 @@ public class ReadBlackTree {
         Node uncle = node.uncle(); //节点的叔叔
 
         if(parent== null){//说明为根 红色变成黑色
-            node.color = Color.BLACK;
+            node.color = BLACK;
         }
         else if(isBlack(parent)){//父亲的颜色为黑色,不需要调整
 
         } else if (isRead(uncle)) {//父亲的颜色为红色,且叔叔的颜色也为红色(需要注意的是,为红色的节点一定不会指向null,也就是说叔叔为红色,那么叔叔一定存在,并且存在爷爷)
             Node grandParent = parent.parent;
-             parent.color = Color.BLACK; //父亲和叔叔都变成黑色
-             uncle.color = Color.BLACK;
+             parent.color = BLACK; //父亲和叔叔都变成黑色
+             uncle.color = BLACK;
             grandParent.color = Color.READ; //把爷爷变成红色
             fixReadRead(grandParent);
 
@@ -323,22 +325,22 @@ public class ReadBlackTree {
             grandParent.color = Color.READ;
             //1. 如果父亲为左孩子,插入节点也是左孩子,此时就是LL
             if(parent.isLeftChild()&&node.isLeftChild()){
-                parent.color = Color.BLACK;
+                parent.color = BLACK;
                 rightRotate(grandParent);
 
             }else if(parent.isLeftChild()){            //2.如果父亲是左孩子,插入节点是右孩子,此时就是LR
-                node.color = Color.BLACK;
+                node.color = BLACK;
                 leftRotate(parent); //变成LL
                 rightRotate(grandParent);
             }
             //3.如果父亲是右孩子,插入节点也是右孩子,此时就是RR
             else if (!node.isLeftChild()){
-                parent.color = Color.BLACK;
+                parent.color = BLACK;
                 leftRotate(grandParent);
             }
             //4.如果父亲是右孩子,插入节点是左还是,此时就是RL
             else {
-                node.color = Color.BLACK;
+                node.color = BLACK;
                 rightRotate(parent);
                 leftRotate(grandParent);
             }
@@ -355,8 +357,162 @@ public class ReadBlackTree {
     * @date: 2023/7/15 下午2:48
     */
     private Node find(int key){
-
-        
+        Node p = root;
+        while(p!=null){
+            if(key<p.key){
+                p = p.left;
+            } else if (key>p.key) {
+                p = p.right;
+            }
+            else return p;
+        }
+        return p;
     }
 
+    /**
+    *
+    * description 查找剩余节点
+    *
+    * @param p 节点
+    * @return  返回p的剩余节点(当p只有一个孩子时,返回他的孩子),如果p左右孩子都有则返回后继
+    * @author: woldier
+    * @date: 2023/7/15 下午2:53
+    */
+    private Node findReplaced(Node p){
+        if(p.left==null &&p.right==null) return null; //为叶子节点的情况
+        if(p.right==null) return p.left; //只有左子树的情况
+        if(p.left==null) return p.right; //只有右子树的情况
+        Node s = p.right; //找后继
+        while(s.left!=null)
+            s = s.left;
+        return s;
+
+
+    }
+
+    public Node remove(int key){
+        Node delete = find(key);//查找到对应节点
+        if(delete==null) return null;
+        //删除操作
+        doRemove(delete);
+        return delete;
+    }
+    private void doRemove(Node del){
+        Node replaced = findReplaced(del);
+        Node parent = del.parent;
+        if(replaced==null){//说明删除的是叶子节点
+            if(del==root) {//case1.1删除的是根节点,没有孩子
+                root = null;
+            }
+            else { //不是根节点
+                if(isBlack(del)){
+                    //复杂操作
+                    fixDoubleBlack(del);
+                }else {
+                    //红色叶子节点,不需要额外处理
+                }
+                if(del.isLeftChild())
+                    parent.left=del.parent=null;
+                else
+                    parent.right=del.parent=null;
+            }
+            return;
+        }
+        if(del.left==null||del.right==null){//有唯一一个孩子
+            if(del==root){ //case1.2 是根节点且只有一个孩子
+                root.key = replaced.key;
+                root.val = replaced.val;
+                root.left=root.right=null;
+                replaced.parent=null; // help GC
+            }
+            else { //不是根节点,且有一个孩子
+                if(del.isLeftChild()){
+                    parent.left=replaced;
+                }else {
+                    parent.right=replaced;
+                }
+                replaced.parent=parent;
+                del.left=del.right=del.parent=null;//help GC
+
+                //先删除再调整
+                if(isBlack(del)&&isBlack(replaced)) { //当前删除的是黑色节点,并且替换节点也是黑色的
+                    fixDoubleBlack(replaced);
+                }
+                else { //当前删除节点与替换节点至少有一个不是黑色
+                    //1.删除的黑色,替换的节点是红色2.删除的节点是红色,替换的节点是黑色3.两个都是红色的情况不可能存在
+                    replaced.color = BLACK;
+                }
+            }
+            return;
+        }
+        //有两个孩子
+        //交换
+        int temp = del.val;
+        del.val = replaced.val;
+        replaced.val = temp;
+
+        int tempK = del.key;
+        del.key = replaced.key;;
+        replaced.key = tempK;
+        doRemove(replaced);//删除交换后的待删除节点
+
+
+
+    }
+
+    private void fixDoubleBlack(Node x) {
+        if(x == root) return;
+        Node parent = x.parent; //得到父亲
+        Node sibling = x.sibling();
+        if(isRead(sibling)){//如果是红色的兄弟
+            if(x.isLeftChild()){
+                leftRotate(parent); // 如果兄弟在右边 那么做一次左旋
+            }else {
+                rightRotate(parent);
+            }
+            sibling.color = BLACK;
+            parent.color = Color.READ;
+            fixDoubleBlack(x); //递归调用
+            return;
+        }
+        if(sibling!=null){
+            //case 4 兄弟是黑色,两个侄子也是黑色
+            if(isBlack(sibling) &&isBlack(sibling)){
+                sibling.color = Color.READ;
+                if(isRead(parent)) parent.color = BLACK;
+                else fixDoubleBlack(parent);
+            }
+            //case 5兄弟是黑色,之子有红色
+            // case 5 兄弟是黑色, 侄子有红色
+            else {
+                // LL
+                if (sibling.isLeftChild() && isRead(sibling.left)) {
+                    rightRotate(parent);
+                    sibling.left.color = BLACK;
+                    sibling.color = parent.color;
+                }
+                // LR
+                else if (sibling.isLeftChild() && isRead(sibling.right)) {
+                    sibling.right.color = parent.color;
+                    leftRotate(sibling);
+                    rightRotate(parent);
+                }
+                // RL
+                else if (!sibling.isLeftChild() && isRead(sibling.left)) {
+                    sibling.left.color = parent.color;
+                    rightRotate(sibling);
+                    leftRotate(parent);
+                }
+                // RR
+                else {
+                    leftRotate(parent);
+                    sibling.right.color = BLACK;
+                    sibling.color = parent.color;
+                }
+                parent.color = BLACK;
+            }
+        }
+        else fixDoubleBlack(parent);
+
+    }
 }
