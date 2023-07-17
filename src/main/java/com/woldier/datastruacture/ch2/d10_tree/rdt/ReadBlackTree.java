@@ -1,6 +1,5 @@
 package com.woldier.datastruacture.ch2.d10_tree.rdt;
 
-import static com.woldier.datastruacture.ch2.d10_tree.rdt.ReadBlackTree.Color.BLACK;
 
 /**
  * description 红黑树
@@ -130,7 +129,7 @@ public class ReadBlackTree {
      * @date: 2023/7/15 上午9:58
      */
     private boolean isBlack(Node node) {
-        return node == null || node.color == BLACK;
+        return node == null || node.color == Color.BLACK;
     }
 
     /**
@@ -307,14 +306,14 @@ public class ReadBlackTree {
         Node uncle = node.uncle(); //节点的叔叔
 
         if(parent== null){//说明为根 红色变成黑色
-            node.color = BLACK;
+            node.color = Color.BLACK;
         }
         else if(isBlack(parent)){//父亲的颜色为黑色,不需要调整
 
         } else if (isRead(uncle)) {//父亲的颜色为红色,且叔叔的颜色也为红色(需要注意的是,为红色的节点一定不会指向null,也就是说叔叔为红色,那么叔叔一定存在,并且存在爷爷)
             Node grandParent = parent.parent;
-             parent.color = BLACK; //父亲和叔叔都变成黑色
-             uncle.color = BLACK;
+             parent.color = Color.BLACK; //父亲和叔叔都变成黑色
+             uncle.color = Color.BLACK;
             grandParent.color = Color.READ; //把爷爷变成红色
             fixReadRead(grandParent);
 
@@ -325,22 +324,22 @@ public class ReadBlackTree {
             grandParent.color = Color.READ;
             //1. 如果父亲为左孩子,插入节点也是左孩子,此时就是LL
             if(parent.isLeftChild()&&node.isLeftChild()){
-                parent.color = BLACK;
+                parent.color = Color.BLACK;
                 rightRotate(grandParent);
 
             }else if(parent.isLeftChild()){            //2.如果父亲是左孩子,插入节点是右孩子,此时就是LR
-                node.color = BLACK;
+                node.color = Color.BLACK;
                 leftRotate(parent); //变成LL
                 rightRotate(grandParent);
             }
             //3.如果父亲是右孩子,插入节点也是右孩子,此时就是RR
             else if (!node.isLeftChild()){
-                parent.color = BLACK;
+                parent.color = Color.BLACK;
                 leftRotate(grandParent);
             }
             //4.如果父亲是右孩子,插入节点是左还是,此时就是RL
             else {
-                node.color = BLACK;
+                node.color = Color.BLACK;
                 rightRotate(parent);
                 leftRotate(grandParent);
             }
@@ -440,7 +439,7 @@ public class ReadBlackTree {
                 }
                 else { //当前删除节点与替换节点至少有一个不是黑色
                     //1.删除的黑色,替换的节点是红色2.删除的节点是红色,替换的节点是黑色3.两个都是红色的情况不可能存在
-                    replaced.color = BLACK;
+                    replaced.color = Color.BLACK;
                 }
             }
             return;
@@ -470,7 +469,7 @@ public class ReadBlackTree {
             }else {
                 rightRotate(parent);
             }
-            sibling.color = BLACK;
+            sibling.color = Color.BLACK;
             parent.color = Color.READ;
             fixDoubleBlack(x); //递归调用
             return;
@@ -479,7 +478,7 @@ public class ReadBlackTree {
             //case 4 兄弟是黑色,两个侄子也是黑色
             if(isBlack(sibling) &&isBlack(sibling)){
                 sibling.color = Color.READ;
-                if(isRead(parent)) parent.color = BLACK;
+                if(isRead(parent)) parent.color = Color.BLACK;
                 else fixDoubleBlack(parent);
             }
             //case 5兄弟是黑色,之子有红色
@@ -488,7 +487,7 @@ public class ReadBlackTree {
                 // LL
                 if (sibling.isLeftChild() && isRead(sibling.left)) {
                     rightRotate(parent);
-                    sibling.left.color = BLACK;
+                    sibling.left.color = Color.BLACK;
                     sibling.color = parent.color;
                 }
                 // LR
@@ -506,10 +505,10 @@ public class ReadBlackTree {
                 // RR
                 else {
                     leftRotate(parent);
-                    sibling.right.color = BLACK;
+                    sibling.right.color = Color.BLACK;
                     sibling.color = parent.color;
                 }
-                parent.color = BLACK;
+                parent.color = Color.BLACK;
             }
         }
         else fixDoubleBlack(parent);
